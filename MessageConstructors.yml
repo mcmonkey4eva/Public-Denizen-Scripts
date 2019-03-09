@@ -36,6 +36,22 @@
 #                                                                              #
 ################################################################################
 #
+#  Example Usages:
+#
+#    - narrate "click <&e><proc[msgUrl].context[<&e>this|google.com/search|<&9>click]> link"
+#
+#    - narrate "read the <&e><proc[msgCommand].context[<&e>help|help|<&a>click here fool!]> docs"
+#
+#    - narrate "hover your mouse on the <&e><proc[msgHover].context[<&e>secret|<&6>gold star!]> message"
+#
+#    - narrate "click <&e><proc[msgChat].context[<&e>yes|yes|Click this]> to make your player say yes in chat"
+#
+#    - narrate "Give the player a <&e><proc[msgHint].context[<&e>Command|command|Click this]> hint"
+#
+#    - narrate " <&e><proc[msgSuggest].context[<&e>Suggest|Maybe say this|Click this]> something for your player to type"
+#
+################################################################################
+#
 #  Message Constructor Library Version
 #
 #  Handles Versioning Checks
@@ -335,13 +351,7 @@ msgBoxed:
 #
 # - Allow scripters to easily have clickable text to open urls, run commands, or just show messages on hover
 #
-#  Example Usage:
-#    - narrate "click <&e><proc[msgUrl].context[<&e>this|google.com/search|<&9>click]> link"
-#    - narrate "read the <&e><proc[msgCommand].context[<&e>help|help|<&a>click here fool!]> docs"
-#    - narrate "hover your mouse on the <&e><proc[msgHover].context[<&e>secret|<&6>gold star!]> message"
-#    - narrate "click <&e><proc[msgChat].context[<&e>yes|yes|Click this]> to make your player say yes in chat"
-#    - narrate "Give the player a <&e><proc[msgHint].context[<&e>Command|command|Click this]> hint"
-#    - narrate " <&e><proc[msgSuggest].context[<&e>Suggest|Maybe say this|Click this]> something for your player to type"
+#  Example usages at the top of this file.
 #
 msgParser:
   type: world
