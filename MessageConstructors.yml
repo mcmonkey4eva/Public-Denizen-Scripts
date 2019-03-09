@@ -83,9 +83,9 @@ MCL_Events:
     - ^define currentVersion '<s@MSG_Version.yaml_key[version]>'
     - ^if '<def[repoVersion]>' == 'unknown':
       - run s@msgPrefixed instantly 'def:MCL|<&7>Unable to check for update! <&7><&o><def[currentVersion]><&7> is installed!'
-      else if '<def[repoVersion]>' > '<def[currentVersion]>':
+    - else if '<def[repoVersion]>' > '<def[currentVersion]>':
       - run s@msgPrefixed instantly 'def:MCL|<&7>Update from version <&o><def[currentVersion]><&7> to <&o><def[repoVersion]><&7>!'
-      else if '<def[repoVersion]>' != '<def[currentVersion]>':
+    - else if '<def[repoVersion]>' != '<def[currentVersion]>':
       - run s@msgPrefixed instantly 'def:MCL|<&7>What happened? You are on version <&o><def[currentVersion]><&7> and the repo says <&o><def[repoVersion]><&7>!'
 
   sendMetrics:
@@ -231,23 +231,23 @@ msgBoxed:
           - define url 'http<&co>//<def[split].get[3].replace[\u0026].with[&].unescaped>'
           - define hover '<def[split].get[4].replace[\u0026].with[&].unescaped>'
           - define button '"color":"<def[c]>","text":"<def[text]>","clickEvent":{"action":"open_url","value":"<def[url]>"},"hoverEvent":{"action":"show_text","value":"<def[hover]>"}'
-          else if '<def[type]>' == 'command':
+        - else if '<def[type]>' == 'command':
           - define tcommand '/<def[split].get[3].replace[\u0026].with[&].unescaped>'
           - define hover '<def[split].get[4].replace[\u0026].with[&].unescaped>'
           - define button '"color":"<def[c]>","text":"<def[text]>","clickEvent":{"action":"run_command","value":"<def[tcommand]>"},"hoverEvent":{"action":"show_text","value":"<def[hover]>"}'
-          else if '%type' == 'hint':
+        - else if '%type' == 'hint':
           - define hint '/<def[split].get[3].replace[\u0026].with[&].unescaped>'
           - define hover '<def[split].get[4].before_last[<&dq>].replace[\u0026].with[&].unescaped>'
           - define button '"text":"<def[text]>","clickEvent":{"action":"suggest_command","value":"<def[hint]>"},"hoverEvent":{"action":"show_text","value":"<def[hover]>"}'
-          else if '%type' == 'suggest':
+        - else if '%type' == 'suggest':
           - define suggest '<def[split].get[3].replace[\u0026].with[&].unescaped>'
           - define hover '<def[split].get[4].before_last[<&dq>].replace[\u0026].with[&].unescaped>'
           - define button '"text":"<def[text]>","clickEvent":{"action":"suggest_command","value":"<def[suggest]>"},"hoverEvent":{"action":"show_text","value":"<def[hover]>"}'
-          else if '<def[type]>' == 'chat':
+        - else if '<def[type]>' == 'chat':
           - define chat '<def[split].get[3].replace[\u0026].with[&].unescaped>'
           - define hover '<def[split].get[4].replace[\u0026].with[&].unescaped>'
           - define button '"text":"<def[text]>","clickEvent":{"action":"run_command","value":"<def[chat]>"},"hoverEvent":{"action":"show_text","value":"<def[hover]>"}'
-          else if '<def[type]>' == 'hover':
+        - else if '<def[type]>' == 'hover':
           - define hover '<def[split].get[3].replace[\u0026].with[&].unescaped>'
           - define button '"color":"<def[c]>","text":"<def[text]>","hoverEvent":{"action":"show_text","value":"<def[hover]>"}'
 
