@@ -7,7 +7,7 @@
 #                                                                              #
 #   Authors: |Anthony|                                                         #
 #   Version: 0.5                                                               #
-#   dScript Version: 1.0.3-DEV_b688                                            #
+#   dScript Version: 1.0.3-DEV_b691                                            #
 #                                                                              #
 #   For bleeding-edge code, bug reports, code contributions, and feature       #
 #    requests, visit the GitHub project:                                       #
@@ -38,17 +38,17 @@
 #
 #  Example Usages:
 #
-#    - narrate "click <&e><proc[msgUrl].context[<&e>this|google.com/search|<&9>click]> link"
+#    - narrate "click <&e><proc[msgUrl].context[<&e>this|google.com/search|<&9>click]><&f> link"
 #
-#    - narrate "read the <&e><proc[msgCommand].context[<&e>help|help|<&a>click here fool!]> docs"
+#    - narrate "read the <&e><proc[msgCommand].context[<&e>help|help|<&a>click here fool!]><&f> docs"
 #
-#    - narrate "hover your mouse on the <&e><proc[msgHover].context[<&e>secret|<&6>gold star!]> message"
+#    - narrate "hover your mouse on the <&e><proc[msgHover].context[<&e>secret|<&6>gold star!]><&f> message"
 #
-#    - narrate "click <&e><proc[msgChat].context[<&e>yes|yes|Click this]> to make your player say yes in chat"
+#    - narrate "click <&e><proc[msgChat].context[<&e>yes|yes|Click this]><&f> to make your player say yes in chat"
 #
-#    - narrate "Give the player a <&e><proc[msgHint].context[<&e>Command|command|Click this]> hint"
+#    - narrate "Give the player a <&e><proc[msgHint].context[<&e>Command|command|Click this]><&f> hint"
 #
-#    - narrate " <&e><proc[msgSuggest].context[<&e>Suggest|Maybe say this|Click this]> something for your player to type"
+#    - narrate " <&e><proc[msgSuggest].context[<&e>Suggest|Maybe say this|Click this]><&f> something for your player to type"
 #
 ################################################################################
 #
