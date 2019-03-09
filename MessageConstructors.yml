@@ -7,7 +7,7 @@
 #                                                                              #
 #   Authors: |Anthony|                                                         #
 #   Version: 0.43                                                              #
-#   dScript Version: 1.0.2-DEV_b261                                            #
+#   dScript Version: 1.0.3-DEV_b688                                            #
 #                                                                              #
 #   For bleeding-edge code, bug reports, code contributions, and feature       #
 #    requests, visit the GitHub project:                                       #
@@ -179,9 +179,9 @@ msgBoxed:
   debug: false
   definitions: script|title|subTitle|command|page|pageWidth|pageHeight
   script:
-    - ^define entries '<def[raw_context].split_by[|].remove[1|2|3|4|5|6|7]>'
+    - ^define entries '<def[raw_context].split[|].remove[1|2|3|4|5|6|7]>'
     - ^foreach 'li@script|title|subTitle|command|page|pageWidth|pageHeight':
-      - define %value% '<def[raw_context].split_by[|].get[%loop_index%]>'
+      - define %value% '<def[raw_context].split[|].get[%loop_index%]>'
     - ^define paragraphs '<proc[paragraph].context[%pageWidth%|<def[entries].separated_by[|]>]>'
     - ^if %page% < 1 {
       - define page '1'
@@ -199,7 +199,7 @@ msgBoxed:
       - define this '%value%'
       - define thisValue '<def[%this%]>'
       - define clean%this% 'li@'
-      - foreach '<def[thisValue].split_by[ ]>':
+      - foreach '<def[thisValue].split[ ]>':
         - define i <def[i].add[1]>
         - define word '%value%'
         - if '%word%' == '' {
@@ -210,7 +210,7 @@ msgBoxed:
           - define clean%this% '<def[clean%this%].include[%word%]>'
           - foreach next
           }
-        - define text '<def[word].after[<&r><&ss>@<&ss><&chr[260f]>].split_by[_-_].get[2].replace[\u0026].with[&].unescaped>'
+        - define text '<def[word].after[<&r><&ss>@<&ss><&chr[260f]>].split[_-_].get[2].replace[\u0026].with[&].unescaped>'
         - define %text% '<def[word].replace[&].with[<&bs><&bs>u0026]>'
         - define clean%this% '<def[clean%this%].include[%text%]>'
       - define clean%this% '<def[clean%this%].separated_by[<&sp>]>'
@@ -231,7 +231,7 @@ msgBoxed:
       }
 
     - ^define finalHeading 'li@'
-    - ^foreach '<def[heading].split_by[ ]>':
+    - ^foreach '<def[heading].split[ ]>':
       - define c '<def[value].last_color.escaped.after[&ss]>'
       - if '%c%' == '' {
         - if <def[lc].exists> {
@@ -246,7 +246,7 @@ msgBoxed:
         }
       - define lc '%c%'
       - if <def[%value%].exists> {
-        - define split '<def[%value%].after[<&ss>@<&ss><&chr[260f]>].split_by[_-_]>'
+        - define split '<def[%value%].after[<&ss>@<&ss><&chr[260f]>].split[_-_]>'
         - define type '<def[split].get[1].unescaped>'
         - define text '<def[split].get[2].replace[\u0026].with[&].unescaped> '
         - if '%type%' == 'URL' {
@@ -367,7 +367,7 @@ msgBoxed:
       - execute as_server 'tellraw <player.name> {"text":"","extra":[{%prefix%},<def[list].separated_by[,].unescaped>]}'
       }
       else {
-      - announce to_console "<&5>|  <&f>Authors:  <&7><def[authors].parse[.yaml_key[text_name]].split_by[<&sp><&sp><&7>]>"
+      - announce to_console "<&5>|  <&f>Authors:  <&7><def[authors].parse[.yaml_key[text_name]].split[<&sp><&sp><&7>]>"
       }
     - ^mark 'end'
     - ^define scroll '<&d>S<&5>-<&d>c<&5>-<&d>r<&5>-<&d>o<&5>-<&d>l<&5>-<&d>l<&5>---<&d>U<&5>-<&d>p<&5>'
@@ -399,9 +399,9 @@ msgParser:
       - queue clear
       }
     - define message '<context.raw_json.after[<&lb>].before_last[<&rb>]>'
-    - foreach '<def[message].after[<&lc>].before_last[<&rc>].split_by[<&rc>,<&lc>].escape_contents>':
+    - foreach '<def[message].after[<&lc>].before_last[<&rc>].split[<&rc>,<&lc>].escape_contents>':
       - define element '<def[value].unescaped>'
-      - foreach '<def[element].split_by[<&dq>,<&dq>]>':
+      - foreach '<def[element].split[<&dq>,<&dq>]>':
         - define node '<def[value]>'
         - define attribute '<def[node].before[<&co>]>'
         - define aValue '<def[node].after[<&co>]>'
@@ -411,7 +411,7 @@ msgParser:
         - if !<def[aValue].starts_with[<&dq><&ss>@<&ss><&chr[260f]>]> {
           - foreach next
           }
-        - define split '<def[aValue].after[<&dq><&ss>@<&ss><&chr[260f]>].split_by[_-_]>'
+        - define split '<def[aValue].after[<&dq><&ss>@<&ss><&chr[260f]>].split[_-_]>'
         - define type '<def[split].get[1].unescaped>'
         - define text '<def[split].get[2].replace[\\u0026].with[&].replace[\u0026].with[&].unescaped>'
         - choose '<def[split].get[1].unescaped>':
@@ -459,7 +459,7 @@ lineWrap:
 
   script:
     - define cleanString 'li@'
-    - foreach '<def[string].split_by[ ]>':
+    - foreach '<def[string].split[ ]>':
       - if '%value%' == '' {
         - define cleanString '<def[cleanString].include[&sp]>'
         - foreach next
@@ -469,7 +469,7 @@ lineWrap:
         - define cleanString '<def[cleanString].include[<def[word]>]>'
         - foreach next
         }
-      - define text '<def[word].after[<&r><&ss>@<&ss><&chr[260f]>].split_by[_-_].get[2].replace[\u0026].with[&].unescaped>'
+      - define text '<def[word].after[<&r><&ss>@<&ss><&chr[260f]>].split[_-_].get[2].replace[\u0026].with[&].unescaped>'
       - define %loop_index% '<def[word].replace[&].with[<&bs><&bs>u0026]>'
       - define cleanString '<def[cleanString].include[%text%]>'
 
@@ -480,7 +480,7 @@ lineWrap:
     - define stringLen '<def[cleanString].unescaped.length>'
     - if %stringLen% <= %targetLen% {
       - define finalString 'li@'
-      - foreach '<def[cleanString].split_by[ ]>' {
+      - foreach '<def[cleanString].split[ ]>' {
         - if <def[%loop_index%].exists> {
           - define finalString '<def[finalString].include[<def[%loop_index%]>]>'
           }
@@ -504,9 +504,9 @@ lineWrap:
         - while stop
         }
         else {
-        - define brake '<t[<def[pass].contains[<&nl>]>]:<def[pass].index_of[<&nl>]>||<def[pass].last_index_of[<&sp>]>>'
+        - define brake '<tern[<def[pass].contains[<&nl>]>]:<def[pass].index_of[<&nl>]>||<def[pass].last_index_of[<&sp>]>>'
         - define increment '<def[increment].add[%brake%]||%brake%>'
-        - define passtrim '%c%<def[pass].unescaped.substring[1,<t[<def[brake].is[MORE].than[0]>]:%brake%||<def[pass].length>>]>'
+        - define passtrim '%c%<def[pass].unescaped.substring[1,<tern[<def[brake].is[MORE].than[0]>]:%brake%||<def[pass].length>>]>'
         - define lines '<def[lines].include[<def[passtrim].escaped>]||<def[lines]>>'
         - define c '<def[passtrim].last_color||<&f>>'
         - define stringLen '<def[stringLen].sub[%brake%]>'
@@ -518,7 +518,7 @@ lineWrap:
     - define finalLines 'li@'
     - foreach '<def[lines]>':
       - define finalString 'li@'
-      - foreach '<def[value].split_by[ ]>':
+      - foreach '<def[value].split[ ]>':
         - define i '<def[i].add[1].as_int>'
         - if <def[%i%].exists> {
           - define finalString '<def[finalString].include[<def[%i%]>]>'
@@ -549,9 +549,9 @@ pagination:
   debug: false
 
   script:
-    - define entries '<def[raw_context].split_by[|].remove[1|2]>'
+    - define entries '<def[raw_context].split[|].remove[1|2]>'
     - foreach 'li@page|pageSize':
-      - define %value% '<def[raw_context].split_by[|].get[%loop_index%]>'
+      - define %value% '<def[raw_context].split[|].get[%loop_index%]>'
     - if <def[page].is[MATCHES].to[number].not> {
       - define page '1'
       }
@@ -582,9 +582,9 @@ paragraph:
   debug: false
 
   script:
-    - define paragraphs '<def[raw_context].split_by[|].remove[1]>'
-    - define lineLen '<def[raw_context].split_by[|].get[1]>'
-    - define lineLen '<t[<def[lineLen].is[matches].to[number].and[<def[lineLen].is[MORE].than[0]>]>]:%lineLen%||44>'
+    - define paragraphs '<def[raw_context].split[|].remove[1]>'
+    - define lineLen '<def[raw_context].split[|].get[1]>'
+    - define lineLen '<tern[<def[lineLen].is[matches].to[number].and[<def[lineLen].is[MORE].than[0]>]>]:%lineLen%||44>'
     - define result 'li@'
     - foreach '<def[paragraphs]>' {
       - define lines '<proc[lineWrap].context[<def[value]>|<def[lineLen]||44>]>'
