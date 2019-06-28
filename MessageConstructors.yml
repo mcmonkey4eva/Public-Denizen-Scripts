@@ -251,11 +251,11 @@ msgBoxed:
           - define tcommand '/<def[split].get[3].replace[\u0026].with[&].unescaped>'
           - define hover '<def[split].get[4].replace[\u0026].with[&].unescaped>'
           - define button '"color":"<def[c]>","text":"<def[text]>","clickEvent":{"action":"run_command","value":"<def[tcommand]>"},"hoverEvent":{"action":"show_text","value":"<def[hover]>"}'
-        - else if '%type' == 'hint':
+        - else if '<def[type]>' == 'hint':
           - define hint '/<def[split].get[3].replace[\u0026].with[&].unescaped>'
           - define hover '<def[split].get[4].before_last[<&dq>].replace[\u0026].with[&].unescaped>'
           - define button '"text":"<def[text]>","clickEvent":{"action":"suggest_command","value":"<def[hint]>"},"hoverEvent":{"action":"show_text","value":"<def[hover]>"}'
-        - else if '%type' == 'suggest':
+        - else if '<def[type]>' == 'suggest':
           - define suggest '<def[split].get[3].replace[\u0026].with[&].unescaped>'
           - define hover '<def[split].get[4].before_last[<&dq>].replace[\u0026].with[&].unescaped>'
           - define button '"text":"<def[text]>","clickEvent":{"action":"suggest_command","value":"<def[suggest]>"},"hoverEvent":{"action":"show_text","value":"<def[hover]>"}'
