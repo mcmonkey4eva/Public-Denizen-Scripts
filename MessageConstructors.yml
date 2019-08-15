@@ -76,8 +76,6 @@ MCL_Events:
 #
     - if <queue.list> !contains 'q@MCL_UpdateCheck':
       - run locally delay:1t updateCheck 'id:MCL_UpdateCheck'
-    - if <queue.list> !contains 'q@MCL_SendMetrics':
-      - run locally delay:1t sendMetrics 'id:MCL_SendMetrics'
 
     on server start:
     - if <queue.list> !contains 'q@MCL_UpdateCheck':
@@ -104,11 +102,6 @@ MCL_Events:
     - else if '<def[repoVersion]>' != '<def[currentVersion]>':
       - run s@msgPrefixed instantly 'def:MCL|<&7>What happened? You are on version <&o><def[currentVersion]><&7> and the repo says <&o><def[repoVersion]><&7>!'
 
-  sendMetrics:
-#    - run s@msgPrefixed instantly 'def:MCL|<&3>Sending usage metrics...'
-    - ~webget "http://stats.denizenscript.com/tracker?script=<s@MSG_Version.yaml_key[id]>&version=<s@MSG_Version.yaml_key[version]>&players=<server.list_online_players.size>&denizen_version=<server.denizen_version.replace[-SNAPSHOT].before[ ]>&jenkins_build=<server.denizen_version.after[(build ].before[)]>&bukkit_version=<server.bukkit_version>" 'save:send'
-    - if !<entry[send].result.starts_with[SUCCESS]||false>:
-      - run s@msgPrefixed instantly 'def:MCL|<&c>Metrics failed!'
 #
 #---------------------------------------
 #

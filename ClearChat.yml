@@ -82,9 +82,6 @@ ClearChat_Events:
     - if <queue.list> !contains 'q@ClearChat_UpdateCheck' {
       - run locally delay:1t updateCheck 'id:ClearChat_UpdateCheck'
       }
-    - if <queue.list> !contains 'q@ClearChat_SendMetrics' {
-      - run locally delay:1t sendMetrics 'id:ClearChat_SendMetrics'
-      }
 
     on server start:
     - if <queue.list> !contains 'q@ClearChat_UpdateCheck' {
@@ -117,10 +114,5 @@ ClearChat_Events:
       - narrate '<&4>[<&6>ClearChat<&4>]  <&7>What happened? You are on version <&o>%currentVersion%<&7> and the repo says <&o>%repoVersion%<&7>!'
       }
 
-  sendMetrics:
-    - ~webget "http://stats.denizenscript.com/tracker?script=<s@ClearChat_Version.yaml_key[id]>&version=<s@ClearChat_Version.yaml_key[version]>&players=<server.list_online_players.size>&denizen_version=<server.denizen_version.replace[-SNAPSHOT].before[ ]>&jenkins_build=<server.denizen_version.after[(build ].before[)]>&bukkit_version=<server.bukkit_version>" 'save:send'
-    - if !<entry[send].result.starts_with[SUCCESS]||false> {
-      - announce to_console '<&4>[<&6>ClearChat<&4>]  <&c>Metrics failed!'
-      }
 #
 ################################################################################

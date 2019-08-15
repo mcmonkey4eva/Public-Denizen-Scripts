@@ -239,9 +239,6 @@ dRegions:
     - if <queue.list> !contains 'q@dRegions_UpdateCheck' {
       - run locally delay:1t updateCheck 'id:dRegions_UpdateCheck'
       }
-    - if <queue.list> !contains 'q@dRegions_SendMetrics' {
-      - run locally delay:1t sendMetrics 'id:dRegions_SendMetrics'
-      }
 
   start:
     - if <queue.list> !contains 'q@dRegions_UpdateCheck' {
@@ -286,13 +283,6 @@ dRegions:
       }
       else if '%repoVersion%' != '%currentVersion%' {
       - run instantly delay:1t s@dRegions_Msg 'def:updateCheck.2|<player||server>|%currentVersion%|%repoVersion%'
-      }
-
-  sendMetrics:
-#    - run instantly delay:1t s@dRegions_Msg 'def:sendMetrics.0|<player||server>'
-    - ~webget "http://stats.denizenscript.com/tracker?script=<s@dRegions_Version.yaml_key[id]>&version=<s@dRegions_Version.yaml_key[version]>&players=<server.list_online_players.size>&denizen_version=<server.denizen_version.replace[-SNAPSHOT].before[ ]>&jenkins_build=<server.denizen_version.after[(build ].before[)]>&bukkit_version=<server.bukkit_version>" 'save:send'
-    - if !<entry[send].result.starts_with[SUCCESS]||false> {
-      - run instantly delay:1t s@dRegions_Msg 'def:sendMetrics.1|<player||server>'
       }
 
   loadLanguages:

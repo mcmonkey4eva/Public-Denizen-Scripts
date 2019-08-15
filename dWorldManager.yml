@@ -89,9 +89,6 @@ dWM_Events:
       - if <queue.list> !contains 'q@dWM_UpdateCheck' {
         - run locally delay:1t updateCheck 'id:dWM_UpdateCheck'
         }
-      - if <queue.list> !contains 'q@dWM_SendMetrics' {
-        - run locally delay:1t sendMetrics 'id:dWM_SendMetrics'
-        }
 
     on server prestart:
       - inject locally loadYaml
@@ -208,13 +205,6 @@ dWM_Events:
       }
       else if '%repoVersion%' != '%currentVersion%' {
       - run s@msgPrefixed instantly 'def:dWM|<&7>What happened? You are on version <&o>%currentVersion%<&7> and the repo says <&o>%repoVersion%<&7>!'
-      }
-
-  sendMetrics:
-#    - run s@msgPrefixed 'def:dWM|<&3>Sending usage metrics...'
-    - ~webget "http://stats.denizenscript.com/tracker?script=<s@dWM_Version.yaml_key[id]>&version=<s@dWM_Version.yaml_key[version]>&players=<server.list_online_players.size>&denizen_version=<server.denizen_version.replace[-SNAPSHOT].before[ ]>&jenkins_build=<server.denizen_version.after[(build ].before[)]>&bukkit_version=<server.bukkit_version>" 'save:send'
-    - if !<entry[send].result.starts_with[SUCCESS]||false> {
-      - run s@msgPrefixed instantly 'def:dWM|<&c>Metrics failed!'
       }
 
   reloadYaml:
