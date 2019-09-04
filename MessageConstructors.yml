@@ -212,7 +212,7 @@ msgBoxed:
     - ^define pagesInfo '<&7><&o>Page <&f><def[page]> <&7><&o>of <&f><def[pageTotal]>'
     - ^define pad '<def[pageWidth].sub[<def[heading].strip_color.length>].sub[<def[pagesInfo].strip_color.length>].mul[1.5].round>'
     - ^if !<player.is_player||false>:
-      - ^announce to_console "<&5>|<&pipe.pad_left[<def[pageWidth]>].with[-]>"
+      - ^announce to_console "<&5>|<&5.pad_left[<def[pageWidth]>].with[-]>|"
       - ^announce to_console "<&5>|<&sp><&sp><&sp><&6><def[heading]> <&7.pad_right[<def[pad]>].with[ ]><def[pagesInfo]>"
       - ^announce to_console "<&5>|<&f>"
       - ^foreach <def[lines]>:
@@ -290,7 +290,7 @@ msgBoxed:
     - ^define tpad '"text":"<&7.pad_right[<def[pad]>].with[ ]>"'
     - ^define p '"text":"<&7><&o>Page<&sp>"'
     - ^define o '"text":"<&7><&o><&sp>of<&sp>"'
-    - ^narrate "<&5>|<&pipe.pad_left[<def[pageWidth]>].with[-]>"
+    - ^narrate "<&5>|<&5.pad_left[<def[pageWidth]>].with[-]>|"
     - ^execute as_server 'tellraw <player.name> {"text":"","extra":[{<def[prefix]>},<def[finalHeading]>,{<def[tpad]>},{<def[p]>},{<def[buttonThis]>},{<def[o]>},{<def[buttonNext]>}]}'
     - ^narrate "<&5>|"
 
@@ -335,7 +335,7 @@ msgBoxed:
     - ^mark 'end'
     - ^define scroll '<&d>S<&5>-<&d>c<&5>-<&d>r<&5>-<&d>o<&5>-<&d>l<&5>-<&d>l<&5>---<&d>U<&5>-<&d>p<&5>'
     - ^define pad '<def[pageWidth].sub[<def[scroll].strip_color.length>].div[2].round_up>'
-    - ^narrate "<&5><&pipe.pad_right[<def[pad]>].with[-]>-<def[scroll]><&pipe.pad_left[<def[pad]>].with[-]>"
+    - ^narrate "<&5><&5.pad_right[<def[pad]>].with[-]>|-<def[scroll]><&5.pad_left[<def[pad]>].with[-]>|"
 #
 #  END msgBoxed
 #--------------------------------------
